@@ -94,10 +94,22 @@
                 Episode navigation whilst in full screen, caching, pre-loading of the next episode when the current is close to ending. 
                 Convenient mobile gestures, such as full swiping left/right to navigate between episodes. Includes a bookmarks/history list.
             </p>
-            <p>Anime can be watched via third-party websites that may or may not have license over the content that they're streaming. 
+            <p>Anime can be watched online via third-party websites that may or may not have license over the content that they're streaming. 
             Nevertheless, it's the easiest way to watch anime. This project stemmed from one common complaint that I had across all of those sites
             that I've used: why can't I go to the next episode while staying in fullscreen? I'm wasting my time watching anime, why can't they 
             at least let me waste it efficiently? This was the main theme of development with this project it seems.
+            </p>
+
+            <p>Scraping and proxying the data was a big challenge. The better sites to scrape from (higher quality streams, 
+            fast updates) had anti-scraping measures in place, mainly code obfuscation and data encoding. One of these better sites have data that's encoded before request, and then decoded using obfuscated client functions, 
+                so scraping the data can't be done through just network requests.
+            The client decoder functions had regularly rotating keys which invalidated the use of past functions, so it was also not as simple as manually copying/pasting
+                these functions to my backend. To circumvent this, the website bundle was periodically fetched and deobfuscated using WebCrack, then Babel to parse the required functions, 
+                then written to a file on the backend which are imported for use in Express.
+            </p>
+
+            <p>Unfortunately, scraping from that website is currently broken as their code obfuscation has increased to unreadable levels and not even WebCrack can help deobfuscate anything.
+            The next step would be to use a headless browser such as Puppeteer and simply relay the stream data.
             </p>
 
             <h3><a href="https://github.com/MelvinHK/TwitchChatFilterApp" target="_blank" class="link">Live Stream Chat
