@@ -104,8 +104,8 @@
             fast updates) had anti-scraping measures in place, mainly code obfuscation and data encoding. One of these better sites have data that's encoded before request, and then decoded using obfuscated client functions, 
                 so scraping the data can't be done through just network requests.
             The client decoder functions had regularly rotating keys which invalidated the use of past functions, so it was also not as simple as manually copying/pasting
-                these functions to my backend. To circumvent this, the website bundle was periodically fetched and deobfuscated using WebCrack, then Babel to parse the required functions, 
-                then written to a file on the backend which are imported for use in Express.
+                these functions to my backend. To circumvent this, the website bundle was fetched and deobfuscated using WebCrack, then Babel to parse the required functions, 
+                then written to a file on the backend which are imported for use in Express. This process was executed hourly via GitHub actions.
             </p>
 
             <p>Unfortunately, scraping from that website is currently broken as their code obfuscation has increased to unreadable levels and not even WebCrack can help deobfuscate anything.
